@@ -304,6 +304,22 @@ span {
   transform: scale(1.1);
   transition: 1s;
 }
+
+
+
+.certificate-img {
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+.certificate-img img {
+ 
+  width: 100%;
+  display: block;
+}
+.certificate-img img:hover {
+  transform: scale(1.1);
+  transition: 1s;
+}
 .contact-form {
   display: grid;
   place-items: center;

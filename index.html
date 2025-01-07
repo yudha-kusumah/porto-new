@@ -10,7 +10,49 @@
     <!-- Box Icons -->
     <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
- 
+  <style>
+    /* Filter Buttons Styles */
+    .portfolio-filter {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+    
+    .filter-btn {
+        padding: 0.8rem 2rem;
+        border: none;
+        border-radius: 4px;
+        background: #f0f0f0;
+        color: #333;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover {
+        background: #2768d9;
+        color: #fff;
+    }
+    
+    .filter-btn.active {
+        background: #2768d9;
+        color: #fff;
+    }
+    * Portfolio Items Animation */
+.portfolio-img {
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.portfolio-img.hide {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+    pointer-events: none;
+}
+</style>    
 </head>
 <body>
     <!-- Navbar -->
@@ -166,39 +208,48 @@
     <br><br><br>
     <!-- Project -->
     <br><br><br><br><br><br><br><br><br>
-    <section class="portfolio" id="portfolio">
-        <div class="heading">
-            <h2>Project</h2>
-            <span>Our Recent Work</span>
+        <section class="portfolio" id="portfolio">
+    <div class="heading">
+        <h2>Project</h2>
+        <span>Our Recent Work</span>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="portfolio-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web App</button>
+        <button class="filter-btn" data-filter="game">Game</button>
+        <button class="filter-btn" data-filter="dashboard">Dashboard</button>
+    </div>
+
+    <div class="portfolio-content">
+        <div class="portfolio-img" data-category="web">
+            <a href="https://login-beta-murex.vercel.app/">
+                <img src="/login.png" alt="Login Page">
+            </a>
         </div>
-        <div class="portfolio-content">
-            <div class="portfolio-img">
-                <a href="https://login-beta-murex.vercel.app/">
-                    <img  src="/login.png" alt="">
-                </a>
-            </div>
-            <div class="portfolio-img">
-                <a href="https://kalkulator11.vercel.app/">
-                    <img src="/kalkulator.png" alt="">
-                </a>
-            </div>
-            <div class="portfolio-img">
-                <a href="https://dashboard-yuda-new.vercel.app/">
-                <img src="dassboard.png" alt="">
-                </a>
-            </div>
-            <div class="portfolio-img">
-                <a href="https://game-snake-mauve.vercel.app/">
-                    <img src="game-snake.png" alt="">  
-                </a>
-            </div>
-            <div class="portfolio-img">
-                <a href="https://chart-tahunan.vercel.app/">
-                    <img src="chart.png" alt="">  
-                </a>
-            </div>
+        <div class="portfolio-img" data-category="web">
+            <a href="https://kalkulator11.vercel.app/">
+                <img src="/kalkulator.png" alt="Calculator">
+            </a>
         </div>
-    </section>
+        <div class="portfolio-img" data-category="dashboard">
+            <a href="https://dashboard-yuda-new.vercel.app/">
+                <img src="dassboard.png" alt="Dashboard">
+            </a>
+        </div>
+        <div class="portfolio-img" data-category="game">
+            <a href="https://game-snake-mauve.vercel.app/">
+                <img src="game-snake.png" alt="Snake Game">
+            </a>
+        </div>
+        <div class="portfolio-img" data-category="dashboard">
+            <a href="https://chart-tahunan.vercel.app/">
+                <img src="chart.png" alt="Chart">
+            </a>
+        </div>
+    </div>
+</section>
 
 
     <br> 
@@ -212,25 +263,25 @@
             <span>My Certificate</span>
         </div>
         <div class="certificate-content">
-            <div class="portfolio-img">
+            <div class="certificate-img">
                 <a href="https://www.sololearn.com/certificates/CC-8L0QHVFB ">
                     <img  src="/html-sertif.png" alt="">
                 </a>
             </div>
 
-            <div class="portfolio-img">
+            <div class="certificate-img">
                 <a href="https://www.sololearn.com/certificates/CC-SSPLSNE7 ">
                     <img src="/css-sertif.png" alt="">
                 </a>
             </div>
 
-            <div class="portfolio-img">
+            <div class="certificate-img">
                 <a href="https://www.sololearn.com/certificates/CC-KELP0XYI ">
                 <img src="/js-sertif.png" alt="">
                 </a>
             </div>
 
-            <div class="portfolio-img">
+            <div class="certificate-img">
                 <a href="https://www.sololearn.com/certificates/CC-UVCTTPGR">
                 <img src="/js-inter.jpg" alt="">
                 </a>
@@ -255,7 +306,7 @@
             </form>
         </div>
     </section>
-<br><br><br>
+<br><br>
     <section class="certificate" id="certificate">
         <h2 class="heading">Location</h2>
     
@@ -274,7 +325,7 @@
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </section>
-<br><br><br><br>
+<br><br><br><br><br>
     <!-- Footer -->
     <div class="footer">
         <h2>My Social Media</h2>
@@ -295,5 +346,32 @@
  
     <!-- Link To JS -->
     <script src="./js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-img');
+        
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+        
+                    const filterValue = button.getAttribute('data-filter');
+        
+                    // Filter items
+                    portfolioItems.forEach(item => {
+                        const itemCategory = item.getAttribute('data-category');
+                        if (filterValue === 'all' || filterValue === itemCategory) {
+                            item.classList.remove('hide');
+                        } else {
+                            item.classList.add('hide');
+                        }
+                    });
+                });
+            });
+        });
+        </script>
 </body>
 </html>
